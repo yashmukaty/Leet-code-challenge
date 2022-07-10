@@ -1,0 +1,21 @@
+public int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
+        int n = horizontalCuts.length;
+        int m = verticalCuts.length;
+        Arrays.sort(horizontalCuts);
+        Arrays.sort(verticalCuts);
+        //find max diff between horizontal cuts
+        int hmax = horizontalCuts[0];
+        for(int i=1;i<n;++i){
+            hmax = Math.max(hmax,horizontalCuts[i]-horizontalCuts[i-1]);
+        }
+        hmax = Math.max(hmax,h-horizontalCuts[n-1]);
+        //find max diff between 2 verticals
+        int vmax = verticalCuts[0];
+        for(int j =1;j<m;++j){
+            vmax = Math.max(vmax,verticalCuts[j]-verticalCuts[j-1]);
+        }
+        vmax = Math.max(vmax,w-verticalCuts[m-1]);
+        int mod = 1000000007;
+        long area = 1l*hmax*vmax;
+        return (int)(area%mod);
+    }
