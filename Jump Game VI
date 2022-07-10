@@ -1,0 +1,16 @@
+    public int maxResult(int[] nums, int k) {
+        int n = nums.length;
+        LinkedList<Integer> list = new LinkedList<>();  //storing indices
+        list.add(0);                        // adding 0 to the front of the list.
+        for(int i=1;i<n;++i){
+            if(list.getFirst()+k < i){      // checking if the elements lies in the range of k, if not then remove
+                list.removeFirst();
+            }
+            nums[i] = nums[i]+nums[list.getFirst()];    //update current value by adding it with the current max value
+            while(!list.isEmpty() && nums[list.getLast()] <= nums[i]){      // checking if the last value(index) in list less than current index value in array, then remove from back of the list.
+                list.removeLast();
+            }
+            list.addLast(i);    //keep adding the index value to the back of the list
+        }
+        return nums[n-1];       // return the last element in array, which will have the max score.
+    }
