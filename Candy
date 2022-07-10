@@ -1,0 +1,23 @@
+ public int candy(int[] ratings) {
+        int[] candies = new int[ratings.length];
+        Arrays.fill(candies,1);
+        boolean haschanged = true;
+        while(haschanged){
+            haschanged = false;
+            for(int i=0;i<ratings.length;++i){
+                if(i!=ratings.length-1 && ratings[i]>ratings[i+1] && candies[i+1]>=candies[i]){
+                    candies[i] = candies[i+1]+1;
+                    haschanged = true;
+                }
+                if(i>0 && ratings[i]>ratings[i-1] && candies[i-1]>=candies[i]){
+                    candies[i] = candies[i-1]+1;
+                    haschanged = true;
+                }
+            }
+        }
+        int sum=0;
+        for(int candy:candies){
+            sum+=candy;
+        }
+        return sum;
+    }
